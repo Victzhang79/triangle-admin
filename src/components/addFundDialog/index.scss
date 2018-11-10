@@ -1,0 +1,52 @@
+.content {
+	text-align: left;
+	padding: 0 30px;
+	.el-input,
+	.el-select,
+	.el-textarea {
+		display: inline-block;
+		width: 400px;
+	}
+	.el-textarea {
+		vertical-align: top;
+	}
+	.item-date {
+		.el-date-editor {
+			width: 145px;
+		}
+		.el-form-item {
+			display: inline-block;
+		}
+		.el-form-item:first-child {
+			margin-right: 15px;
+		}
+	}
+	.min-price {
+		.el-input {
+			width: 190px;
+		}
+		.el-select {
+			width: 190px;
+			margin-left: 20px;
+		}
+	}
+	.end-date {
+		margin-left: 10px;
+	}
+	.unit {
+		position: absolute;
+		margin-left: 5px;
+	}
+	.rateCode {
+		label {
+			width: 110px !important;
+		}
+		.el-form-item__content {
+			margin-left: 110px !important;
+		}
+	}
+}
+
+.dialog-footer {
+	text-align: center;
+}

@@ -1,0 +1,28 @@
+.pawnRecord-page {
+	text-align: left;
+	.title {
+		border-bottom: 1px solid #ccc;
+		padding-bottom: 10px;
+	}
+	.querys {
+		color: #666;
+		.item {
+			display: inline-block;
+			width: 220px;
+			margin: 10px 20px 10px 0;
+		}
+	}
+	.pagination {
+		margin-top: 20px;
+		text-align: center;
+	}
+	.success {
+		color: #67c23a;
+	}
+	.failed {
+		color: #f56c6c;
+	}
+	.unknowed {
+		color: #e6a23c;
+	}
+}

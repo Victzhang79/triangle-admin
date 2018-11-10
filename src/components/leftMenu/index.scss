@@ -1,0 +1,22 @@
+.menu-list {
+	text-align: left;
+	background: #fafafa;
+	height: 100%;
+	color: #2e2e2e;
+	padding-top: 20px;
+	user-select: none;
+	.item {
+		padding-left: 20px;
+		line-height: 40px;
+		cursor: pointer;
+		&:hover {
+			background-color: #aaa;
+			color: #fff;
+		}
+		&.chosed {
+			background-color: #aaa;
+			color: #fff;
+			border-left: 4px solid #f35353;
+		}
+	}
+}
