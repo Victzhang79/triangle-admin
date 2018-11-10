@@ -9,6 +9,8 @@ import User from '../pages/user';
 // import PawnRecord from '../pages/pawnRecords';
 // import CoinRecord from '../pages/coinRecords';
 // import Hold from '../pages/hold';
+import Deposit from '../pages/deposit';
+import Fund from '../pages/fund';
 
 Vue.use(Router);
 
@@ -28,31 +30,16 @@ export default new Router({
 			path: '/user',
 			name: 'User',
 			component: User
+		},
+		{
+			path: '/deposit',
+			name: 'Deposit',
+			component: Deposit
+		},
+		{
+			path: '/fund',
+			name: 'Fund',
+			component: Fund
 		}
-		// {
-		// 	path: '/pawn_record',
-		// 	name: 'pawnRecord',
-		// 	component: PawnRecord
-		// },
-		// {
-		// 	path: '/coins',
-		// 	name: 'Coins',
-		// 	component: Coins
-		// },
-		// {
-		// 	path: '/pawn',
-		// 	name: 'Pawn',
-		// 	component: Pawn
-		// },
-		// {
-		// 	path: '/coin_record',
-		// 	name: 'coinRecord',
-		// 	component: CoinRecord
-		// },
-		// {
-		// 	path: '/hold',
-		// 	name: 'Hold',
-		// 	component: Hold
-		// }
 	]
 });
