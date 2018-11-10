@@ -17,7 +17,7 @@ export default {
 				'&mock_apiId=5b9861ab43f4b33e73450522'
 		);
 	},
-	// 查询定存列表
+	// 查询资金流向列表
 	getFundList: params => {
 		return http.get(
 			DOMAIN +
@@ -29,6 +29,8 @@ export default {
 				params.startDate +
 				'&endDate=' +
 				params.endDate +
+				'&orderBy=' +
+				params.orderBy +
 				'&mock_apiId=5b9861ab43f4b33e73450522'
 		);
 	}
