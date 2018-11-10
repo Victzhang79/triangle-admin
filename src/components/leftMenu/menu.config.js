@@ -2,6 +2,12 @@ const menuList = [
 	{
 		index: 0,
 		name: '认证管理',
+		path: 'identification',
+		authLevel: 1//权限等级： 1-普通管理员，2-超级管理员
+	},
+	{
+		index: 1,
+		name: '用户管理',
 		path: 'user',
 		authLevel: 1//权限等级： 1-普通管理员，2-超级管理员
 	},
