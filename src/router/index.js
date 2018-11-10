@@ -3,6 +3,7 @@ import Router from 'vue-router';
 // import Home from '../pages/Home.vue'
 import Login from '../pages/login';
 import Identification from '../pages/identification';
+import User from '../pages/user';
 // import Coins from '../pages/coins';
 // import Pawn from '../pages/pawn';
 // import PawnRecord from '../pages/pawnRecords';
@@ -22,6 +23,11 @@ export default new Router({
 			path: '/identification',
 			name: 'Identification',
 			component: Identification
+		},
+		{
+			path: '/user',
+			name: 'User',
+			component: User
 		}
 		// {
 		// 	path: '/pawn_record',
