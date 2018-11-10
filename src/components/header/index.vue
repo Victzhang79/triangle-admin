@@ -1,7 +1,7 @@
 <template>
 	<div class="header">
-		<img src="../../assets/imgs/logo_2x.png" alt="aoabank" width="40">
-		<span class="logoTxt">KOOBANK</span>
+		<img src="../../assets/imgs/logo_2x.png" alt="aoabank">
+		<span class="logoTxt">波点钱包</span>
 		<p class="user">
 			<span>欢迎，{{username}}</span>
 			<el-button v-if="username!=='请登录'" @click="logout" class="logoutBtn" size="mini">退出</el-button>
