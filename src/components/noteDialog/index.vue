@@ -48,7 +48,7 @@ export default {
 			if (!this.newRemark) {
 				this.$notify({
 					title: '警告',
-					message: '请选择拒绝理由',
+					message: '请填写备注信息',
 					type: 'warning'
 				});
 				return false;
@@ -67,6 +67,7 @@ export default {
 							message: '操作成功',
 							type: 'success'
 						});
+						this.$store.dispatch('updateCredentList');
 					} else {
 						this.$notify.error({
 							title: '错误',

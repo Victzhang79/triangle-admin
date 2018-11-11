@@ -103,7 +103,7 @@ export default {
 								'changeUserType',
 								data.data.adminRole
 							);
-							this.$router.push('/user');
+							this.$router.push('/identification');
 						} else {
 							this.$message({
 								message: data.msg,
