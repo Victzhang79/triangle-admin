@@ -48,8 +48,8 @@ export default {
 					label: '身份证信息和输入信息不匹配'
 				},
 				{
-					value: '其他原因',
-					label: '其他原因'
+					value: '未按要求上传',
+					label: '未按要求上传'
 				}
 			],
 			value: ''
