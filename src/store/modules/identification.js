@@ -24,6 +24,7 @@ const mutations = {
 	// 更改审核状态查询条件
 	changeAuditStatus(state, value) {
 		state.auditStatus = value;
+		state.pageNo = 1;
 	},
 	// 更改当前页码
 	changePageNo(state, value) {
