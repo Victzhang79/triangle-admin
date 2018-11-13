@@ -27,7 +27,7 @@
 			</el-table-column>
 			<el-table-column label="证件照" width="80">
 				<template slot-scope="scope">
-					<el-button type="text" size="small" @click="showPic(scope.row.credentPic, scope.row.credentNo)">查看</el-button>
+					<el-button v-if="scope.row.credentNo" type="text" size="small" @click="showPic(scope.row.credentPic, scope.row.credentNo)">查看</el-button>
 				</template>
 			</el-table-column>
 			<el-table-column label="备注" width="80">
@@ -37,7 +37,8 @@
 			</el-table-column>
 			<el-table-column fixed="right" label="认证状态/操作" width="150">
 				<template slot-scope="scope">
-					<p class="command" v-if="scope.row.auditStatus == '0'">
+					<p v-if="!scope.row.credentNo" class="unknowed">未认证</p>
+					<p class="command" v-else-if="scope.row.auditStatus == '0'">
 						<el-button type="success" size="small" @click="credentAdmit(scope)" plain>通过</el-button>
 						<el-button type="danger" size="small" @click="refuseClick(scope)" plain>拒绝</el-button>
 					</p>
