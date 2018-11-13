@@ -103,13 +103,16 @@ export default {
 		this.gotoPage(this.currPage);
 	},
 	watch: {
-		currPage(val) {
-			this.lastOrderNo = (val - 1) * this.pageSize;
+		// currPage(val) {
+		// 	this.lastOrderNo = (val - 1) * this.pageSize;
+		// }
+		dateRangeModel(val) {
+			this.search();
 		}
 	},
 	methods: {
 		indexMethod(index) {
-			return index + 1;
+			return (this.currPage - 1) * this.pageSize + index + 1;
 		},
 		search() {
 			console.log(this.dateRangeModel);
