@@ -6,7 +6,7 @@ export default {
 	getDepositList: params => {
 		return http.get(
 			DOMAIN +
-				'getFundInfoList?pageNo=' +
+				'qryTimeDepositList?pageNo=' +
 				params.pageNo +
 				'&pageSize=' +
 				params.pageSize +
@@ -14,14 +14,14 @@ export default {
 				params.startDate +
 				'&endDate=' +
 				params.endDate +
-				'&mock_apiId=5b9861ab43f4b33e73450522'
+				'&mock_apiId=5bead27741c2c429288308fc'
 		);
 	},
 	// 查询资金流向列表
-	getFundList: params => {
+	getPerformanceList: params => {
 		return http.get(
 			DOMAIN +
-				'getFundInfoList?pageNo=' +
+				'qryPerformanceList?pageNo=' +
 				params.pageNo +
 				'&pageSize=' +
 				params.pageSize +
@@ -31,7 +31,7 @@ export default {
 				params.endDate +
 				'&orderBy=' +
 				params.orderBy +
-				'&mock_apiId=5b9861ab43f4b33e73450522'
+				'&mock_apiId=5beacc78535e6d022778d6d0'
 		);
 	}
 };

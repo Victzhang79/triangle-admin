@@ -10,27 +10,27 @@
 			<el-table :data="depositList" border style="width: 100%">
 				<el-table-column label="序号" width="50" type="index" :index="indexMethod">
 				</el-table-column>
-				<el-table-column prop="date" label="日期" width="100">
+				<el-table-column prop="countDate" label="日期" width="100">
 				</el-table-column>
-				<el-table-column prop="lockNum" label="今日锁定定投数" width="120">
+				<el-table-column prop="todayLockedNum" label="今日锁定定投数" width="120">
 				</el-table-column>
-				<el-table-column prop="unlockNum" label="今日解锁定投数" width="120">
+				<el-table-column prop="todayUnLockedNum" label="今日解锁定投数" width="120">
 				</el-table-column>
-				<el-table-column prop="amount" label="今日定投数" width="95">
+				<el-table-column prop="todayTimeDepositNum" label="今日定投数" width="95">
 				</el-table-column>
-				<el-table-column prop="five" label="5天">
+				<el-table-column prop="daysNum5" label="5天">
 				</el-table-column>
-				<el-table-column prop="ten" label="10天">
+				<el-table-column prop="daysNum10" label="10天">
 				</el-table-column>
-				<el-table-column prop="thirty" label="30天">
+				<el-table-column prop="daysNum30" label="30天">
 				</el-table-column>
-				<el-table-column prop="ninty" label="90天">
+				<el-table-column prop="daysNum90" label="90天">
 				</el-table-column>
-				<el-table-column prop="yiba" label="180天">
+				<el-table-column prop="daysNum180" label="180天">
 				</el-table-column>
-				<el-table-column prop="sanliu" label="360天">
+				<el-table-column prop="daysNum360" label="360天">
 				</el-table-column>
-				<el-table-column prop="thousand" label="1000天">
+				<el-table-column prop="daysNum1000" label="1000天">
 				</el-table-column>
 			</el-table>
 			<div class="pagers">
@@ -103,9 +103,6 @@ export default {
 		this.gotoPage(this.currPage);
 	},
 	watch: {
-		// currPage(val) {
-		// 	this.lastOrderNo = (val - 1) * this.pageSize;
-		// }
 		dateRangeModel(val) {
 			this.search();
 		}
@@ -134,47 +131,7 @@ export default {
 				endDate: this.dateRangeModel[1]
 			}).then(res => {
 				if (res.code == 200) {
-					this.depositList = [
-						{
-							date: '2018-11-11',
-							lockNum: 10000,
-							unlockNum: 100,
-							amount: 100000,
-							five: 100,
-							ten: 1000,
-							thirty: 2000,
-							ninty: 1003,
-							yiba: 10002,
-							sanliu: 2001,
-							thousand: 10022
-						},
-						{
-							date: '2018-11-12',
-							lockNum: 1000000,
-							unlockNum: 1000,
-							amount: 100000,
-							five: 100,
-							ten: 1000,
-							thirty: 2000,
-							ninty: 1003,
-							yiba: 10002,
-							sanliu: 2001,
-							thousand: 10022
-						},
-						{
-							date: '2018-11-13',
-							lockNum: 1000000,
-							unlockNum: 1000,
-							amount: 100000,
-							five: 100,
-							ten: 1000,
-							thirty: 2000,
-							ninty: 1003,
-							yiba: 10002,
-							sanliu: 2001,
-							thousand: 10022
-						}
-					];
+					this.depositList = res.data;
 					this.totalNum = res.totalNum;
 					this.currPage = val;
 				}
