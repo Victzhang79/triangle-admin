@@ -12,22 +12,20 @@
 			<el-button class="search-btn" type="primary" size="mini" @click="search">查询</el-button>
 		</div>
 		<div class="coin-list">
-			<el-table :data="depositList" border style="width: 100%">
+			<el-table :data="performanceList" border style="width: 100%">
 				<el-table-column label="序号" width="80" type="index" :index="indexMethod">
 				</el-table-column>
-				<el-table-column prop="date" label="日期" width="120">
+				<el-table-column prop="countDate" label="日期" width="120">
 				</el-table-column>
-				<el-table-column prop="lockNum" label="真实业绩">
+				<el-table-column prop="truePerformance" label="真实业绩">
 				</el-table-column>
-				<el-table-column prop="unlockNum" label="可提数量">
+				<el-table-column prop="withdrawableNum" label="可提数量">
 				</el-table-column>
-				<el-table-column prop="amount" label="锁仓数量">
+				<el-table-column prop="lockedNum" label="锁仓数量">
 				</el-table-column>
-				<el-table-column prop="amount" label="已解锁数量">
+				<el-table-column prop="unLockedNum" label="已解锁数量">
 				</el-table-column>
-				<el-table-column prop="amount" label="奖励数量">
-				</el-table-column>
-				<el-table-column prop="amount" label="定存数量">
+				<el-table-column prop="timeDepositNum" label="定存数量">
 				</el-table-column>
 			</el-table>
 			<div class="pagers">
@@ -42,7 +40,7 @@ import Api from '../../apis/deposit.js';
 export default {
 	data() {
 		return {
-			depositList: [
+			performanceList: [
 				{
 					date: '2018-11-11',
 					lockNum: 10000,
@@ -67,21 +65,9 @@ export default {
 				{
 					value: '3',
 					label: '锁仓数量'
-				},
-				{
-					value: '4',
-					label: '已解锁数量'
-				},
-				{
-					value: '5',
-					label: '奖励数量'
-				},
-				{
-					value: '6',
-					label: '定存数量'
 				}
 			],
-			orderBy: '',
+			orderBy: '1',
 			dateRangeModel: '',
 			pickerOptions: {
 				shortcuts: [
@@ -152,7 +138,7 @@ export default {
 			this.gotoPage('gotoPage', page);
 		},
 		gotoPage(val) {
-			Api.getDepositList({
+			Api.getPerformanceList({
 				pageNo: val,
 				pageSize: this.pageSize,
 				startDate: this.dateRangeModel[0],
@@ -160,47 +146,7 @@ export default {
 				orderBy: this.orderBy
 			}).then(res => {
 				if (res.code == 200) {
-					this.depositList = [
-						{
-							date: '2018-11-11',
-							lockNum: 10000,
-							unlockNum: 100,
-							amount: 100000,
-							five: 100,
-							ten: 1000,
-							thirty: 2000,
-							ninty: 1003,
-							yiba: 10002,
-							sanliu: 2001,
-							thousand: 10022
-						},
-						{
-							date: '2018-11-12',
-							lockNum: 1000000,
-							unlockNum: 1000,
-							amount: 100000,
-							five: 100,
-							ten: 1000,
-							thirty: 2000,
-							ninty: 1003,
-							yiba: 10002,
-							sanliu: 2001,
-							thousand: 10022
-						},
-						{
-							date: '2018-11-13',
-							lockNum: 1000000,
-							unlockNum: 1000,
-							amount: 100000,
-							five: 100,
-							ten: 1000,
-							thirty: 2000,
-							ninty: 1003,
-							yiba: 10002,
-							sanliu: 2001,
-							thousand: 10022
-						}
-					];
+					this.performanceList = res.data;
 					this.totalNum = res.totalNum;
 					this.currPage = val;
 				}
