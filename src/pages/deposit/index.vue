@@ -103,7 +103,7 @@ export default {
 		this.gotoPage(this.currPage);
 	},
 	watch: {
-		dateRangeModel(val) {
+		dateRangeModel() {
 			this.search();
 		}
 	},
