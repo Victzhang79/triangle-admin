@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { auditCredent } from '../../apis/identification.js';
+import { auditCredent, addCredentNote } from '../../apis/identification.js';
 import { mapGetters } from 'vuex';
 export default {
 	computed: {
@@ -78,6 +78,13 @@ export default {
 							title: '成功',
 							message: '操作成功',
 							type: 'success'
+						});
+						addCredentNote(
+							this.userId,
+							'',
+							'拒绝认证：' + this.value
+						).catch(() => {
+							console.log('添加备注失败');
 						});
 						this.$store.dispatch('updateCredentList');
 					} else {

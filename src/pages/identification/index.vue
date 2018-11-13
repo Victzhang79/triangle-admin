@@ -64,7 +64,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { auditCredent } from '../../apis/identification.js';
+import { auditCredent, addCredentNote } from '../../apis/identification.js';
 import refuseDialog from '../../components/refuseDialog/index';
 import noteDialog from '../../components/noteDialog/index';
 import picServerPath from '../../assets/config/picServer.js';
@@ -149,6 +149,13 @@ export default {
 				.then(data => {
 					if (data.code == 200) {
 						// scope.row.auditStatus = 1;
+						addCredentNote(
+							scope.row.userId,
+							'',
+							'通过认证。'
+						).catch(() => {
+							console.log('添加备注失败');
+						});
 						this.$store.dispatch('updateCredentList');
 					} else {
 						this.$notify.error({
