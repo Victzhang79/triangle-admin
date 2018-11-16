@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { opHold } from '../../apis/hold.js';
+import { opLockedCoin } from '../../apis/user.js';
 export default {
 	props: {
 		params: {
@@ -42,11 +42,13 @@ export default {
 	},
 	methods: {
 		operate() {
+			// console.log('11111');
 			if (!this.opNum) {
 				this.$message.error('请输入操作代持的数量');
 				return false;
 			}
-			opHold(this.params.userId, this.opNum, this.params.opType)
+			// console.log(this.params.userId, this.opNum, this.params.opType);
+			opLockedCoin(this.params.userId, this.opNum, this.params.opType)
 				.then(data => {
 					if (data.code === 200) {
 						this.$message.success('操作成功！');

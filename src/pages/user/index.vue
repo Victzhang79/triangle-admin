@@ -2,95 +2,99 @@
 	<div class="user-page">
 		<h1 class="title">用户管理</h1>
 		<p class="query">
-			<span>排序： </span>
-			<el-select size="small" style="margin-right: 30px;" v-model="auditStatusModel" placeholder="请选择">
-				<el-option v-for="item in auditStatusOps" :key="item.value" :label="item.label" :value="item.value">
+			<!-- <span>排序： </span>
+			<el-select size="small" style="margin-right: 30px;" v-model="orderTypeModel" placeholder="请选择">
+				<el-option v-for="item in orderTypeOps" :key="item.value" :label="item.label" :value="item.value">
 				</el-option>
-			</el-select>
+			</el-select> -->
 			<span>手机号： </span>
 			<el-input size="small" style="width: 150px;" v-model="searchMobile" placeholder="请输入内容"></el-input>
-			<el-button style="margin-left: 20px;" size="small" type="primary" @click="()=>this.$store.dispatch('updateCredentList')">查询</el-button>
+			<el-button style="margin-left: 20px;" size="small" type="primary" @click="search">查询</el-button>
 		</p>
-		<el-table size="small" :data="credentList" border style="width: 100%">
+		<el-table size="small" :data="userList" border style="width: 100%">
 			<el-table-column fixed prop="userMobile" label="用户手机" width="120">
 			</el-table-column>
-			<el-table-column prop="submitTime" label="提交时间" width="150">
+			<el-table-column prop="createTime" label="注册时间" width="150">
 			</el-table-column>
-			<el-table-column prop="familyName" label="姓" width="80">
+			<el-table-column label="身份级别" width="100">
+				<template slot-scope="scope">{{scope.row.isLeader==='1'?'领导人': '普通用户'}}</template>
 			</el-table-column>
-			<el-table-column prop="givenName" label="名字" width="100">
+			<el-table-column prop="firstSubNum" label="一级下级" width="80">
 			</el-table-column>
-			<el-table-column prop="nationName" label="国籍" width="120">
+			<el-table-column prop="totalSubNum" label="总下级" width="100">
 			</el-table-column>
-			<el-table-column label="证件类型" width="120">
-				<template slot-scope="scope">{{credentTypes[scope.row.credentType]}}</template>
+			<el-table-column prop="firstAPerformance" label="一级业绩" width="120">
 			</el-table-column>
-			<el-table-column prop="credentNo" label="证件" width="200">
+			<el-table-column prop="totalPerformance" label="总业绩" width="120">
 			</el-table-column>
-			<el-table-column label="证件照" width="80">
+			<el-table-column prop="withdrawableNum" label="可提数量" width="120">
+			</el-table-column>
+			<el-table-column prop="lockedNum" label="锁仓数量" width="120">
+			</el-table-column>
+			<el-table-column prop="canReleaseNum" label="可释放" width="120">
+			</el-table-column>
+			<el-table-column label="账号状态" width="120">
+				<template slot-scope="scope">{{scope.row.userStatus==='1'?'可用':'停用'}}</template>
+			</el-table-column>
+			<el-table-column label="提币状态" width="120">
+				<template slot-scope="scope">{{scope.row.withdrawStatus==='1'?'可提':'禁止'}}</template>
+			</el-table-column>
+			<el-table-column fixed="right" label="账户操作" width="100">
 				<template slot-scope="scope">
-					<el-button type="text" size="small" @click="showPic(scope.row.credentPic, scope.row.credentNo)">查看</el-button>
+					<el-button class="disalbedOp" type="text" size="small">停用</el-button>
+					<el-button class="disalbedOp" type="text" size="small">启用</el-button>
 				</template>
 			</el-table-column>
-			<el-table-column label="备注" width="80">
+			<el-table-column fixed="right" label="提币操作" width="100">
 				<template slot-scope="scope">
-					<el-button type="text" size="small" @click="showRemarks(scope)">显示</el-button>
+					<el-button class="disalbedOp" type="text" size="small">允许</el-button>
+					<el-button class="disalbedOp" type="text" size="small">禁止</el-button>
 				</template>
 			</el-table-column>
-			<el-table-column fixed="right" label="认证状态/操作" width="150">
+			<el-table-column fixed="right" label="锁仓管理" width="120">
 				<template slot-scope="scope">
-					<p class="command" v-if="scope.row.auditStatus == '0'">
-						<el-button type="success" size="small" @click="credentAdmit(scope)" plain>通过</el-button>
-						<el-button type="danger" size="small" @click="refuseClick(scope)" plain>拒绝</el-button>
-					</p>
-					<p v-else-if="scope.row.auditStatus == '1'" class="success">已通过</p>
-					<p v-else-if="scope.row.auditStatus == '2'" class="failed">已拒绝</p>
-					<p v-else class="unknowed">未知状态</p>
+					<el-button type="text" @click="sendHold(scope)" size="small">发放</el-button>
+					<el-button class="disalbedOp" type="text" size="small">锁定</el-button>
+					<el-button class="disalbedOp" type="text" size="small">解锁</el-button>
 				</template>
 			</el-table-column>
 		</el-table>
 		<div class="pagination">
-			<el-pagination layout="prev, pager, next" :page-size="pageSize" :total="totalNum" :current-page="pageNo" @current-change="changePage" background>
+			<el-pagination layout="prev, pager, next" :page-size="uPageSize" :total="uTotalNum" :current-page="uPageNo" @current-change="changePage" background>
 			</el-pagination>
 		</div>
-		<el-dialog :title="'证件号：'+identificationNum" :width="'940px'" :visible.sync="identifPicVisible">
-			<!-- <p>证件号：{{identificationNum}}</p> -->
-			<img :src="identificationImg" width="900" alt="认证照片">
-		</el-dialog>
-
-		<refuse-dialog :userId="refuseUser"></refuse-dialog>
-		<note-dialog :userId="remarkUser" :remarks="remarkList"></note-dialog>
+		<operate-hold :visible="operateHoldVisible" :params="operateParam" @close="operateHoldVisible=false"></operate-hold>
 	</div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-import { auditCredent } from '../../apis/identification.js';
-import refuseDialog from '../../components/refuseDialog/index';
-import noteDialog from '../../components/noteDialog/index';
-import picServerPath from '../../assets/config/picServer.js';
+import operateHold from '../../components/operateHold';
 export default {
 	computed: {
 		...mapGetters([
-			'auditStatus',
-			'credentList',
-			'pageSize',
-			'pageNo',
-			'totalNum'
+			'uOrderType',
+			'userList',
+			'uPageSize',
+			'uPageNo',
+			'uTotalNum'
 		]),
-		auditStatusModel: {
+		orderTypeModel: {
 			get() {
-				return this.auditStatus;
+				return this.uOrderType;
 			},
 			set(val) {
-				this.$store.commit('changeAuditStatus', val);
-				this.$store.dispatch('updateCredentList');
+				this.$store.commit('changeUserQuerys', {
+					uOrderType: val,
+					uMobile: 0
+				});
+				this.$store.dispatch('updateUserList');
 			}
 		}
 	},
 	data() {
 		return {
-			auditStatusOps: [
+			orderTypeOps: [
 				{
 					value: '0',
 					label: '待审核'
@@ -115,86 +119,72 @@ export default {
 				'4': '港澳通行证',
 				'9': '其他'
 			},
-			refuseUser: '', //当前拒绝用户的userId
-			remarkUser: '', //当前备注用户的userId
-			remarkList: [], //当前用户的备注
-			identificationImg: '', //认证照片链接
-			identificationNum: '', //认证证件号
-			identifPicVisible: false, //弹窗展示认证照片
-			searchMobile: '' // 手机号查询
+			searchMobile: '', // 手机号查询
+			operateHoldVisible: false,
+			operateParam: {} //userId, opType
 		};
 	},
 	created() {
-		this.$store.dispatch('updateCredentList');
+		this.$store.dispatch('updateUserList');
 	},
 	methods: {
-		// 查看认证图片
-		showPic(src, number) {
-			let path = window.location.protocol + picServerPath + src;
-			this.identificationImg = path;
-			this.identificationNum = number;
-			this.identifPicVisible = true;
-		},
-		showRemarks(scope) {
-			this.remarkUser = scope.row.userId;
-			this.remarkList = scope.row.noteList;
-			this.$store.commit('changeNoteDialogVisible', true);
-		},
 		// 分页页码变化
 		changePage(val) {
-			this.$store.commit('changePageNo', val);
-			this.$store.dispatch('updateCredentList');
+			this.$store.commit('changeUserQuerys', {
+				uPageNo: val
+			});
+			this.$store.dispatch('updateUserList');
 		},
 		// 认证通过
-		credentAdmit(scope) {
-			auditCredent(scope.row.userId, '1')
-				.then(data => {
-					if (data.code == 200) {
-						// scope.row.auditStatus = 1;
-						this.$store.dispatch('updateCredentList');
-					} else {
-						this.$notify.error({
-							title: '错误',
-							message: data.msg
-						});
-					}
-				})
-				.catch(() => {
-					this.$notify.error({
-						title: '错误',
-						message: '网路异常，刷新重试'
-					});
+
+		sendHold(scope) {
+			this.operateParam = {
+				userId: scope.row.userId,
+				opType: '1'
+			};
+			this.operateHoldVisible = true;
+		},
+		unlockHold(scope) {
+			this.operateParam = {
+				userId: scope.row.userId,
+				opType: '2'
+			};
+			this.operateHoldVisible = true;
+		},
+		sellHold(scope) {
+			this.operateParam = {
+				userId: scope.row.userId,
+				opType: '3'
+			};
+			this.operateHoldVisible = true;
+		},
+		search() {
+			if (!this.searchMobile) {
+				// this.refreshList();
+				this.$store.commit('changeUserQuerys', {
+					uPageNo: 1,
+					uMobile: 0
 				});
-		},
-		// 认证拒绝
-		credentDeny() {
-			// auditCredent(scope.row.userId, '1')
-			// 	.then(data => {
-			// 		if (data.code == 200) {
-			// 			scope.row.auditStatus = 2;
-			// 		} else {
-			// 			this.$notify.error({
-			// 				title: '错误',
-			// 				message: data.msg
-			// 			});
-			// 		}
-			// 	})
-			// 	.catch(err => {
-			// 		this.$notify.error({
-			// 			title: '错误',
-			// 			message: '网路异常，刷新重试'
-			// 		});
-			// 	});
-		},
-		// 选择拒绝原因
-		refuseClick(scope) {
-			this.refuseUser = scope.row.userId;
-			this.$store.commit('changeRefuseDialogVisible', true);
+				this.$store.dispatch('updateUserList');
+				return false;
+			}
+			if (
+				/^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\d{8}$/.test(
+					this.searchMobile
+				)
+			) {
+				this.$store.commit('changeUserQuerys', {
+					uPageNo: 1,
+					uMobile: this.searchMobile
+				});
+				this.$store.dispatch('updateUserList');
+			} else {
+				this.$message.error('您输入的号码格式有误！');
+			}
 		}
 	},
 	components: {
-		refuseDialog,
-		noteDialog
+		operateHold
 	}
 };
 </script>
