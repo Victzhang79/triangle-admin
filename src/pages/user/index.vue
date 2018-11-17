@@ -175,7 +175,6 @@ export default {
 				message: '账户操作功能开发中，请耐心等待。'
 			});
 			return;
-			//
 			if (scope.row.userStatus === opType) {
 				return;
 			}
@@ -202,7 +201,6 @@ export default {
 				message: '提币操作功能开发中，请耐心等待。'
 			});
 			return;
-			//
 			if (scope.row.withdrawStatus === opType) {
 				return;
 			}

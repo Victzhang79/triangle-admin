@@ -35,6 +35,8 @@ const actions = {
 			}
 		}).catch(() => {
 			// window.location.reload();
+			state.depositDetailList = [];
+			state.ddTotalNum = 0;
 		})
 	}
 };

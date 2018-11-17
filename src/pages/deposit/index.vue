@@ -12,25 +12,25 @@
 				</el-table-column>
 				<el-table-column prop="countDate" label="日期" width="100">
 				</el-table-column>
-				<el-table-column prop="todayLockedNum" label="今日锁定定投数" width="120">
+				<el-table-column prop="lockedTotalNum" label="今日锁定定投数" width="120">
 				</el-table-column>
-				<el-table-column prop="todayUnLockedNum" label="今日解锁定投数" width="120">
+				<el-table-column prop="unlockedTotalNum" label="今日解锁定投数" width="120">
 				</el-table-column>
-				<el-table-column prop="todayTimeDepositNum" label="今日定投数" width="95">
+				<el-table-column prop="depositTotalNum" label="今日定投数" width="95">
 				</el-table-column>
-				<el-table-column prop="daysNum5" label="5天">
+				<el-table-column prop="depositNum5" label="5天">
 				</el-table-column>
-				<el-table-column prop="daysNum10" label="10天">
+				<el-table-column prop="depositNum10" label="10天">
 				</el-table-column>
-				<el-table-column prop="daysNum30" label="30天">
+				<el-table-column prop="depositNum30" label="30天">
 				</el-table-column>
-				<el-table-column prop="daysNum90" label="90天">
+				<el-table-column prop="depositNum90" label="90天">
 				</el-table-column>
-				<el-table-column prop="daysNum180" label="180天">
+				<el-table-column prop="depositNum180" label="180天">
 				</el-table-column>
-				<el-table-column prop="daysNum360" label="360天">
+				<el-table-column prop="depositNum360" label="360天">
 				</el-table-column>
-				<el-table-column prop="daysNum1000" label="1000天">
+				<el-table-column prop="depositNum1000" label="1000天">
 				</el-table-column>
 			</el-table>
 			<div class="pagers">
