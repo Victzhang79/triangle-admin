@@ -41,21 +41,21 @@
 			</el-table-column>
 			<el-table-column fixed="right" label="账户操作" width="100">
 				<template slot-scope="scope">
-					<el-button class="disalbedOp" type="text" size="small">停用</el-button>
-					<el-button class="disalbedOp" type="text" size="small">启用</el-button>
+					<el-button :class="{disalbedOp:scope.row.userStatus==='0'}" @click="operateCount(scope, '0')" type="text" size="small">停用</el-button>
+					<el-button :class="{disalbedOp:scope.row.userStatus==='1'}" @click="operateCount(scope, '1')" type="text" size="small">启用</el-button>
 				</template>
 			</el-table-column>
 			<el-table-column fixed="right" label="提币操作" width="100">
 				<template slot-scope="scope">
-					<el-button class="disalbedOp" type="text" size="small">允许</el-button>
-					<el-button class="disalbedOp" type="text" size="small">禁止</el-button>
+					<el-button :class="{disalbedOp:scope.row.withdrawStatus==='1'}" @click="operateStatus(scope, '1')" type="text" size="small">允许</el-button>
+					<el-button :class="{disalbedOp:scope.row.withdrawStatus==='0'}" @click="operateStatus(scope, '0')" type="text" size="small">禁止</el-button>
 				</template>
 			</el-table-column>
 			<el-table-column fixed="right" label="锁仓管理" width="120">
 				<template slot-scope="scope">
-					<el-button type="text" @click="sendHold(scope)" size="small">发放</el-button>
-					<el-button class="disalbedOp" type="text" size="small">锁定</el-button>
-					<el-button class="disalbedOp" type="text" size="small">解锁</el-button>
+					<el-button type="text" @click="operateHolds(scope, '1')" size="small">发放</el-button>
+					<el-button type="text" @click="operateHolds(scope, '2')" size="small">锁定</el-button>
+					<el-button type="text" @click="operateHolds(scope, '3')" size="small">解锁</el-button>
 				</template>
 			</el-table-column>
 		</el-table>
@@ -70,6 +70,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import operateHold from '../../components/operateHold';
+import { updateUserStatus, updateWithdrawStatus } from '@/apis/user.js';
 export default {
 	computed: {
 		...mapGetters([
@@ -135,32 +136,9 @@ export default {
 			});
 			this.$store.dispatch('updateUserList');
 		},
-		// 认证通过
-
-		sendHold(scope) {
-			this.operateParam = {
-				userId: scope.row.userId,
-				opType: '1'
-			};
-			this.operateHoldVisible = true;
-		},
-		unlockHold(scope) {
-			this.operateParam = {
-				userId: scope.row.userId,
-				opType: '2'
-			};
-			this.operateHoldVisible = true;
-		},
-		sellHold(scope) {
-			this.operateParam = {
-				userId: scope.row.userId,
-				opType: '3'
-			};
-			this.operateHoldVisible = true;
-		},
+		// 根据号码查询
 		search() {
 			if (!this.searchMobile) {
-				// this.refreshList();
 				this.$store.commit('changeUserQuerys', {
 					uPageNo: 1,
 					uMobile: 0
@@ -181,6 +159,77 @@ export default {
 			} else {
 				this.$message.error('您输入的号码格式有误！');
 			}
+		},
+		// 锁仓管理 opType: 1-发放，2-锁定，3-解锁
+		operateHolds(scope, opType) {
+			if (opType !== '1') {
+				this.$notify.info({
+					title: '功能开发中',
+					message:
+						(opType === '2' ? '锁定' : '解锁') +
+						'功能开发中，请耐心等待。'
+				});
+				return;
+			}
+			this.operateParam = {
+				userId: scope.row.userId,
+				opType: opType
+			};
+			this.operateHoldVisible = true;
+		},
+		// 账户操作 opType: 0-停用，1-启用
+		operateCount(scope, opType) {
+			this.$notify.info({
+				title: '功能开发中',
+				message: '账户操作功能开发中，请耐心等待。'
+			});
+			return;
+			//
+			if (scope.row.userStatus === opType) {
+				return;
+			}
+			this.$confirm(
+				'确定要' + (opType === '0' ? '停用' : '启用') + '此账号?',
+				'提示',
+				{
+					confirmButtonText: '确定',
+					cancelButtonText: '取消',
+					type: 'warning'
+				}
+			)
+				.then(() => {
+					updateUserStatus(scope.row.userId, opType);
+				})
+				.catch(() => {
+					// console.log('')
+				});
+		},
+		// 提币操作 opType: 0-禁止，1-允许
+		operateStatus(scope, opType) {
+			this.$notify.info({
+				title: '功能开发中',
+				message: '提币操作功能开发中，请耐心等待。'
+			});
+			return;
+			//
+			if (scope.row.withdrawStatus === opType) {
+				return;
+			}
+			this.$confirm(
+				(opType === '0' ? '禁止' : '允许') + '此账号提币?',
+				'提示',
+				{
+					confirmButtonText: '确定',
+					cancelButtonText: '取消',
+					type: 'warning'
+				}
+			)
+				.then(() => {
+					updateWithdrawStatus(scope.row.userId, opType);
+				})
+				.catch(() => {
+					// console.log('')
+				});
 		}
 	},
 	components: {

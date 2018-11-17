@@ -18,7 +18,7 @@ export default {
 			default() {
 				return {
 					userId: '',
-					opType: '0' //1：发放代持，2：解锁代持，3：出售代持
+					opType: '0' //1：发放，2：锁定，3：解锁
 				};
 			}
 		},
@@ -36,7 +36,7 @@ export default {
 	},
 	data() {
 		return {
-			types: ['', '发放代持', '解锁代持', '出售代持'],
+			types: ['', '发放锁仓', '锁定', '解锁'],
 			opNum: undefined
 		};
 	},
@@ -44,7 +44,7 @@ export default {
 		operate() {
 			// console.log('11111');
 			if (!this.opNum) {
-				this.$message.error('请输入操作代持的数量');
+				this.$message.error('请输入操作数量');
 				return false;
 			}
 			// console.log(this.params.userId, this.opNum, this.params.opType);
