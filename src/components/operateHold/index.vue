@@ -42,17 +42,15 @@ export default {
 	},
 	methods: {
 		operate() {
-			// console.log('11111');
 			if (!this.opNum) {
 				this.$message.error('请输入操作数量');
 				return false;
 			}
-			// console.log(this.params.userId, this.opNum, this.params.opType);
 			opLockedCoin(this.params.userId, this.opNum, this.params.opType)
 				.then(data => {
 					if (data.code === 200) {
 						this.$message.success('操作成功！');
-						window.location.reload();
+						this.$store.dispatch('updateUserList');
 					} else {
 						this.$message.error(data.msg);
 					}

@@ -162,15 +162,6 @@ export default {
 		},
 		// 锁仓管理 opType: 1-发放，2-锁定，3-解锁
 		operateHolds(scope, opType) {
-			if (opType !== '1') {
-				this.$notify.info({
-					title: '功能开发中',
-					message:
-						(opType === '2' ? '锁定' : '解锁') +
-						'功能开发中，请耐心等待。'
-				});
-				return;
-			}
 			this.operateParam = {
 				userId: scope.row.userId,
 				opType: opType

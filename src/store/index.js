@@ -7,6 +7,7 @@ import pawnRecords from './modules/pawnRecords';
 import coinRecords from './modules/coinRecords';
 import coins from './modules/coins';
 import user from './modules/user';
+import depositDetail from './modules/depositDetail';
 
 Vue.use(Vuex);
 
@@ -17,6 +18,7 @@ export default new Vuex.Store({
 		pawnRecords,
 		coinRecords,
 		coins,
-		user
+		user,
+		depositDetail
 	}
 });

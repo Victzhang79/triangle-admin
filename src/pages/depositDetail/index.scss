@@ -1,0 +1,28 @@
+.user-page {
+	text-align: left;
+	.title {
+		border-bottom: 1px solid #ccc;
+		padding-bottom: 10px;
+	}
+	.query {
+		margin-top: 10px;
+		color: #666;
+		margin-bottom: 10px;
+	}
+	.pagination {
+		margin-top: 20px;
+		text-align: center;
+	}
+	.success {
+		color: #67c23a;
+	}
+	.failed {
+		color: #f56c6c;
+	}
+	.unknowed {
+		color: #e6a23c;
+	}
+	.disalbedOp {
+		color: #999;
+	}
+}

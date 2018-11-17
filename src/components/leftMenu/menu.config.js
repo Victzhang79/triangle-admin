@@ -23,6 +23,12 @@ const menuList = [
 		name: '资金流向',
 		path: 'fund',
 		authLevel: 1
+	},
+	{
+		index: 4,
+		name: '定存明细',
+		path: 'depositDetail',
+		authLevel: 1
 	}
 ];
 
