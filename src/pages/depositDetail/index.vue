@@ -5,6 +5,7 @@
 			<span>手机号： </span>
 			<el-input size="small" style="width: 150px;" v-model="searchMobile" placeholder="请输入内容"></el-input>
 			<el-button style="margin-left: 20px;" size="small" type="primary" @click="search">查询</el-button>
+			<el-button style="margin-left: 20px;" size="small" type="primary" icon="el-icon-refresh" @click="refresh"></el-button>
 		</p>
 		<el-table size="small" :data="depositDetailList" border style="width: 100%">
 			<el-table-column fixed prop="depositId" label="定存记录ID">
@@ -84,6 +85,10 @@ export default {
 			} else {
 				this.$message.error('您输入的号码格式有误！');
 			}
+		},
+		refresh() {
+			this.searchMobile = '';
+			this.search();
 		}
 	}
 };
