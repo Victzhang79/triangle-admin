@@ -19,13 +19,13 @@
 			<el-table-column label="身份级别" width="100">
 				<template slot-scope="scope">{{scope.row.isLeader==='1'?'领导人': '普通用户'}}</template>
 			</el-table-column>
-			<el-table-column prop="firstSubNum" label="一级下级" width="80">
+			<el-table-column prop="subOne" label="一级下级" width="80">
 			</el-table-column>
-			<el-table-column prop="totalSubNum" label="总下级" width="100">
+			<el-table-column prop="subTotal" label="总下级" width="100">
 			</el-table-column>
-			<el-table-column prop="firstAPerformance" label="一级业绩" width="120">
+			<el-table-column prop="archiveOne" label="一级业绩" width="120">
 			</el-table-column>
-			<el-table-column prop="totalPerformance" label="总业绩" width="120">
+			<el-table-column prop="archiveTotal" label="总业绩" width="120">
 			</el-table-column>
 			<el-table-column prop="withdrawableNum" label="可提数量" width="120">
 			</el-table-column>
