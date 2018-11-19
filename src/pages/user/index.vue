@@ -10,14 +10,18 @@
 			<span>手机号： </span>
 			<el-input size="small" style="width: 150px;" v-model="searchMobile" placeholder="请输入内容"></el-input>
 			<el-button style="margin-left: 20px;" size="small" type="primary" @click="search">查询</el-button>
+			<el-button style="margin-left: 20px;" size="small" type="primary" icon="el-icon-refresh" @click="refresh"></el-button>
 		</p>
 		<el-table size="small" :data="userList" border style="width: 100%">
 			<el-table-column fixed prop="userMobile" label="用户手机" width="120">
 			</el-table-column>
 			<el-table-column prop="createTime" label="注册时间" width="150">
 			</el-table-column>
+			<el-table-column label="认证状态" width="100">
+				<template slot-scope="scope">{{credentTypes[scope.row.credentStatus]}}</template>
+			</el-table-column>
 			<el-table-column label="身份级别" width="100">
-				<template slot-scope="scope">{{scope.row.isLeader==='1'?'领导人': '普通用户'}}</template>
+				<template slot-scope="scope">{{scope.row.subTotal>=500?'领导人': '普通用户'}}</template>
 			</el-table-column>
 			<el-table-column prop="subOne" label="一级下级" width="80">
 			</el-table-column>
@@ -113,13 +117,13 @@ export default {
 					label: '全部'
 				}
 			],
-			credentTypes: {
-				'1': '居民身份证',
-				'2': '护照',
-				'3': '士官证',
-				'4': '港澳通行证',
-				'9': '其他'
-			},
+			credentTypes: [
+				//0：未认证，1：认证通过， 2：认证失败， 3：审核中
+				'未认证',
+				'认证通过',
+				'认证失败',
+				'审核中'
+			],
 			searchMobile: '', // 手机号查询
 			operateHoldVisible: false,
 			operateParam: {} //userId, opType
@@ -219,6 +223,11 @@ export default {
 				.catch(() => {
 					// console.log('')
 				});
+		},
+		// 查询信息重置
+		refresh() {
+			this.searchMobile = '';
+			this.search();
 		}
 	},
 	components: {
