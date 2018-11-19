@@ -174,11 +174,6 @@ export default {
 		},
 		// 账户操作 opType: 0-停用，1-启用
 		operateCount(scope, opType) {
-			this.$notify.info({
-				title: '功能开发中',
-				message: '账户操作功能开发中，请耐心等待。'
-			});
-			return;
 			if (scope.row.userStatus === opType) {
 				return;
 			}
@@ -192,7 +187,17 @@ export default {
 				}
 			)
 				.then(() => {
-					updateUserStatus(scope.row.userId, opType);
+					updateUserStatus(scope.row.userId, opType)
+						.then(data => {
+							if (data.code === 200) {
+								this.$store.dispatch('updateUserList');
+							} else {
+								this.$message.error(data.msg);
+							}
+						})
+						.catch(err => {
+							this.$message.error(err);
+						});
 				})
 				.catch(() => {
 					// console.log('')
@@ -200,11 +205,6 @@ export default {
 		},
 		// 提币操作 opType: 0-禁止，1-允许
 		operateStatus(scope, opType) {
-			this.$notify.info({
-				title: '功能开发中',
-				message: '提币操作功能开发中，请耐心等待。'
-			});
-			return;
 			if (scope.row.withdrawStatus === opType) {
 				return;
 			}
@@ -218,7 +218,17 @@ export default {
 				}
 			)
 				.then(() => {
-					updateWithdrawStatus(scope.row.userId, opType);
+					updateWithdrawStatus(scope.row.userId, opType)
+						.then(data => {
+							if (data.code === 200) {
+								this.$store.dispatch('updateUserList');
+							} else {
+								this.$message.error(data.msg);
+							}
+						})
+						.catch(err => {
+							this.$message.error(err);
+						});
 				})
 				.catch(() => {
 					// console.log('')
