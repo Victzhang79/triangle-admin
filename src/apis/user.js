@@ -39,7 +39,7 @@ function updateUserStatus(userId, userStatus) {
  * @param {string} withdrawStatus 提币状态：0：禁止，1：允许
  */
 function updateWithdrawStatus(userId, withdrawStatus) {
-	http.post(updateWithdrawStatusPath, {
+	return http.post(updateWithdrawStatusPath, {
 		userId,
 		withdrawStatus
 	});
