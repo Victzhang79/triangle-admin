@@ -30,5 +30,9 @@ export default {
 				return true;
 			}
 		}
+	},
+	// trx数量展示最多保留一位小数
+	trxNumberShow(num) {
+		return num % 1 === 0 ? num : num.toFixed(1);
 	}
 };
