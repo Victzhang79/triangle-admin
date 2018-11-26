@@ -35,7 +35,7 @@
 			</el-table-column>
 			<el-table-column prop="lockedNum" label="锁仓数量" width="120">
 			</el-table-column>
-			<el-table-column prop="alreadyReleaseNum" label="已释放" width="120">
+			<el-table-column prop="canReleaseNum" label="可释放" width="120">
 			</el-table-column>
 			<el-table-column label="账号状态" width="120">
 				<template slot-scope="scope">{{scope.row.userStatus==='1'?'可用':'停用'}}</template>

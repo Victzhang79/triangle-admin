@@ -112,7 +112,6 @@ export default {
 			return (this.currPage - 1) * this.pageSize + index + 1;
 		},
 		search() {
-			console.log(this.dateRangeModel);
 			this.gotoPage(1);
 		},
 		prevPage() {
