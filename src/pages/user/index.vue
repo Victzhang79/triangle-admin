@@ -64,7 +64,7 @@
 			</el-table-column>
 		</el-table>
 		<div class="pagination">
-			<el-pagination layout="prev, pager, next" :page-size="uPageSize" :total="uTotalNum" :current-page="uPageNo" @current-change="changePage" background>
+			<el-pagination layout="prev, pager, next, jumper" :page-size="uPageSize" :total="uTotalNum" :current-page="uPageNo" @current-change="changePage" background>
 			</el-pagination>
 		</div>
 		<operate-hold :visible="operateHoldVisible" :params="operateParam" @close="operateHoldVisible=false"></operate-hold>

@@ -27,8 +27,8 @@
 			</el-table-column>
 			<el-table-column label="证件照" width="80">
 				<template slot-scope="scope">
-					<div @click="showPic(scope.row.credentPic, scope.row.credentNo)" class="authPic">
-						<img :src="picServerPath+src" alt="查看">
+					<div :key="scope.row.credentNo" @click="showPic(scope.row.credentPic, scope.row.credentNo)" class="authPic">
+						<img :src="'http:'+picServerPath+scope.row.credentPic" alt="查看">
 					</div>
 					<!-- <el-button v-if="scope.row.credentNo" type="text" size="small" @click="showPic(scope.row.credentPic, scope.row.credentNo)">查看</el-button> -->
 				</template>
@@ -52,7 +52,7 @@
 			</el-table-column>
 		</el-table>
 		<div class="pagination">
-			<el-pagination layout="prev, pager, next" :page-size="pageSize" :total="totalNum" :current-page="pageNo" @current-change="changePage" background>
+			<el-pagination layout="prev, pager, next, jumper" :page-size="pageSize" :total="totalNum" :current-page="pageNo" @current-change="changePage" background>
 			</el-pagination>
 		</div>
 		<el-dialog :title="'证件号：'+identificationNum" :width="'940px'" :visible.sync="identifPicVisible">
@@ -122,7 +122,8 @@ export default {
 			remarkList: [], //当前用户的备注
 			identificationImg: '', //认证照片链接
 			identificationNum: '', //认证证件号
-			identifPicVisible: false //弹窗展示认证照片
+			identifPicVisible: false, //弹窗展示认证照片
+			picServerPath: picServerPath
 		};
 	},
 	created() {
