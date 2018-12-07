@@ -22,4 +22,12 @@
 	.unknowed {
 		color: #e6a23c;
 	}
+	.authPic {
+		height: 30px;
+		img {
+			// position: absolute;
+			width: 100%;
+			height: 100%;
+		}
+	}
 }

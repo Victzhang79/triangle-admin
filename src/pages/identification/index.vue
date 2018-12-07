@@ -27,7 +27,10 @@
 			</el-table-column>
 			<el-table-column label="证件照" width="80">
 				<template slot-scope="scope">
-					<el-button v-if="scope.row.credentNo" type="text" size="small" @click="showPic(scope.row.credentPic, scope.row.credentNo)">查看</el-button>
+					<div @click="showPic(scope.row.credentPic, scope.row.credentNo)" class="authPic">
+						<img :src="picServerPath+src" alt="查看">
+					</div>
+					<!-- <el-button v-if="scope.row.credentNo" type="text" size="small" @click="showPic(scope.row.credentPic, scope.row.credentNo)">查看</el-button> -->
 				</template>
 			</el-table-column>
 			<el-table-column label="备注" width="80">
