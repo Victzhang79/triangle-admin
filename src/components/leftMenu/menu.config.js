@@ -29,6 +29,12 @@ const menuList = [
 		name: '定存明细',
 		path: 'depositDetail',
 		authLevel: 1
+	},
+	{
+		index: 5,
+		name: '提现明细',
+		path: 'withdrawDetail',
+		authLevel: 1
 	}
 ];
 

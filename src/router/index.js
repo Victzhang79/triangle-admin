@@ -12,6 +12,7 @@ import User from '../pages/user';
 import Deposit from '../pages/deposit';
 import Fund from '../pages/fund';
 import DepositDetail from '../pages/depositDetail';
+import WithdrawDetail from '../pages/withdrawDetail';
 
 Vue.use(Router);
 
@@ -46,6 +47,11 @@ export default new Router({
 			path: '/depositDetail',
 			name: 'DepositDetail',
 			component: DepositDetail
+		},
+		{
+			path: '/withdrawDetail',
+			name: 'WithdrawDetail',
+			component: WithdrawDetail
 		}
 	]
 });
