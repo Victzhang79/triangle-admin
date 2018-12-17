@@ -92,7 +92,7 @@ export default {
           this.totalNum = res.totalNum;
           this.currPage = val;
         } else {
-          this.$message.error("提现明细查询失败，请稍后重试");
+          this.$message.error(res.msg || "用户提现明细查询失败，请稍后重试");
         }
       });
     },
